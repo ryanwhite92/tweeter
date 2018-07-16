@@ -27,8 +27,7 @@ body {
 
  main.container {
   background-color: #fff;
-  position: relative;
-  top: 140px;
-  margin: 0 auto;
+  margin: 80px auto 0 auto;
+  padding: 60px 2em;
   width: 450px;
  }
