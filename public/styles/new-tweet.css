@@ -6,7 +6,7 @@ section.new-tweet {
 }
 
 .new-tweet h2 {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #244751;
   margin-top: 0;
 }
 
@@ -18,4 +18,8 @@ section.new-tweet {
 
 .counter {
   float: right;
+}
+
+.invalid {
+  color: red;
 }
