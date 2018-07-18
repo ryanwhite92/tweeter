@@ -25,9 +25,81 @@ body {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 
- main.container {
+main.container {
   background-color: #fff;
   margin: 80px auto 0 auto;
   padding: 60px 2em;
   width: 450px;
- }
+}
+
+/*
+ * Styles individual Tweets
+ */
+
+article.tweet {
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  margin: 0.5em 0;
+}
+
+article.tweet header {
+  border-radius: 5px 5px 0 0;
+  background-color: #eee;
+  color: #5f5f5f;
+  opacity: 0.8;
+}
+
+article.tweet h2 {
+  display: inline-block;
+  margin: 0.5em 0;
+  vertical-align: top;
+}
+
+article.tweet header p {
+  display: inline-block;
+  margin: 0.5em;
+  float: right;
+}
+
+article.tweet p {
+  margin: 1em;
+}
+
+article.tweet footer {
+  border-top: 1px solid #eee;
+  padding: 0.5em;
+}
+
+article.tweet footer i {
+  display: none;
+}
+
+article.tweet img {
+  border-radius: 5px;
+  margin: 0.5em;
+}
+
+/*
+ * Styles Rweets when hovered over
+ */
+
+article.tweet:hover {
+  border: 1px solid #5f5f5f;
+}
+
+article.tweet:hover header {
+  opacity: 1;
+}
+
+article.tweet:hover footer i {
+  display: inline;
+  float: right;
+  color: #00a087;
+  opacity: 0.7;
+  margin: 3px;
+}
+
+
+
+
+
