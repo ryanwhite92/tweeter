@@ -64,6 +64,9 @@ $(document).ready(function() {
   function renderTweets(tweets) {
     const $tweetsContainer = $('#tweets-container');
 
+    // Ensure tweets-container is empty before appending tweets
+    $tweetsContainer.empty();
+
     // Order tweets in reverse chronological order
     tweets = tweets.sort(function(a, b) {
       return b.created_at - a.created_at;
@@ -117,7 +120,7 @@ $(document).ready(function() {
       method: 'POST',
       data: $input,
       success: function(tweets, status) {
-        console.log('saved' + tweets + ', ' + status);
+        loadTweets();
       }
     });
   });
