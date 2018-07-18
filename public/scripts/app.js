@@ -7,28 +7,6 @@
 
 $(document).ready(function() {
 
-  // Return time since tweet was created as days, hours, minutes, or seconds
-  function timeSinceTweet(created) {
-    const seconds = Math.floor((Date.now() - created) / 1000);
-    let time = Math.floor(seconds / (60 * 60 * 24));
-
-    if (time > 1) {
-      return time + ' days ago';
-    }
-
-    time = Math.floor(seconds / (60 * 60));
-    if (time > 1) {
-      return time + ' hours ago';
-    }
-
-    time = Math.floor(seconds / 60);
-    if (time > 1) {
-      return time + ' minutes ago';
-    }
-
-    return Math.floor(time) + ' seconds ago';
-  }
-
   // Takes a tweet object and returns a tweet article element containing the
   // tweets entire HTML structure
   function createTweetElement(data) {
@@ -36,7 +14,7 @@ $(document).ready(function() {
     const $header = $('<header>');
     const $content = $('<p>');
     const $footer = $('<footer>');
-    const tweetAge = timeSinceTweet(data.created_at);
+    const tweetAge = moment(data.created_at).fromNow();
 
     // Add data into header section of tweet
     $('<img>').attr('src', data.user.avatars.small).appendTo($header);
@@ -106,6 +84,7 @@ $(document).ready(function() {
     event.preventDefault();
 
     const $this = $(this);
+    console.log($this);
     const $inputValue = $this.children('textarea').val();
     const validateInput = validateTweet($inputValue);
 
@@ -114,6 +93,7 @@ $(document).ready(function() {
     }
 
     const $input = $this.serialize();
+    console.log('$input' + $input)
 
     $.ajax({
       url: '/tweets',
