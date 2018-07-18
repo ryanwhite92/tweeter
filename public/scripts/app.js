@@ -8,7 +8,7 @@
 $(document).ready(function() {
 
   // Return time since tweet was created as days, hours, minutes, or seconds
-  function timeSince(created) {
+  function timeSinceTweet(created) {
     const seconds = Math.floor((Date.now() - created) / 1000);
     let time = Math.floor(seconds / (60 * 60 * 24));
 
@@ -36,7 +36,7 @@ $(document).ready(function() {
     const $header = $('<header>');
     const $content = $('<p>');
     const $footer = $('<footer>');
-    const tweetAge = timeSince(data.created_at);
+    const tweetAge = timeSinceTweet(data.created_at);
 
     // Add data into header section of tweet
     $('<img>').attr('src', data.user.avatars.small).appendTo($header);
@@ -64,6 +64,11 @@ $(document).ready(function() {
   function renderTweets(tweets) {
     const $tweetsContainer = $('#tweets-container');
 
+    // Order tweets in reverse chronological order
+    tweets = tweets.sort(function(a, b) {
+      return b.created_at - a.created_at;
+    });
+
     tweets.forEach(function(tweet) {
       const $addTweet = createTweetElement(tweet);
       $addTweet.appendTo($tweetsContainer);
@@ -81,12 +86,30 @@ $(document).ready(function() {
     });
   }
 
+  // Check that tweet content is not empty and/or exceed 140 characters
+  function validateTweet(tweetContent) {
+    if (tweetContent === '' || tweetContent === null) {
+      return 'Tweet content empty.';
+    } else if (tweetContent.length > 140) {
+      return 'Tweet exceeded character length.';
+    }
+
+    return true;
+  }
+
   loadTweets();
 
   $('.new-tweet form').on('submit', function(event) {
     event.preventDefault();
 
     const $this = $(this);
+    const $inputValue = $this.children('textarea').val();
+    const validateInput = validateTweet($inputValue);
+
+    if (validateInput !== true) {
+      return alert(validateInput);
+    }
+
     const $input = $this.serialize();
 
     $.ajax({
@@ -97,8 +120,6 @@ $(document).ready(function() {
         console.log('saved' + tweets + ', ' + status);
       }
     });
-
-
   });
 
 
