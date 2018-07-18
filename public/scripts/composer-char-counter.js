@@ -2,9 +2,9 @@
 $(document).ready(function() {
 
   $('section.new-tweet textarea').on('input', function() {
-    const tweetText = $(this).val();
-    const counter = $(this).siblings('.counter');
-    const charCount = 140 - tweetText.length;
+    var tweetText = $(this).val();
+    var counter = $(this).siblings('.counter');
+    var charCount = 140 - tweetText.length;
 
     if (charCount < 0) {
       counter.addClass('invalid');
@@ -12,7 +12,7 @@ $(document).ready(function() {
       counter.removeClass('invalid');
     }
 
-    counter.html(charCount);
+    counter.text(charCount);
   });
 
 });
