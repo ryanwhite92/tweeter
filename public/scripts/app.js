@@ -25,6 +25,28 @@ const tweetData = {
 
 $(document).ready(function() {
 
+  // Return time since tweet was created as days, hours, minutes, or seconds
+  function timeSince(created) {
+    let seconds = Math.floor((Date.now() - created) / 1000);
+    let time = Math.floor(seconds / (60 * 60 * 24));
+
+    if (time > 1) {
+      return time + ' days ago';
+    }
+
+    time = Math.floor(seconds / (60 * 60));
+    if (time > 1) {
+      return time + ' hours ago';
+    }
+
+    time = Math.floor(seconds / 60);
+    if (time > 1) {
+      return time + ' minutes ago';
+    }
+
+    return time + 'seconds ago';
+  }
+
   // Takes a tweet object and returns a tweet article element containing the
   // tweets entire HTML structure
   function createTweetElement(data) {
@@ -32,7 +54,7 @@ $(document).ready(function() {
     var $header = $('<header>').appendTo($article);
     var $content = $('<p>').text(data.content.text).appendTo($article);
     var $footer = $('<footer>').appendTo($article);
-    //var timeAgo
+    var tweetAge = timeSince(data.created_at);
 
     // Add data into header section of tweet
     $('<img>').attr('src', data.user.avatars.small).appendTo($header);
@@ -40,7 +62,7 @@ $(document).ready(function() {
     $('<p>').text(data.user.handle).appendTo($header);
 
     // Add data into footer section of tweet
-    $('<small>').text(data.created_at).appendTo($footer);
+    $('<small>').text(tweetAge).appendTo($footer);
     $('<i>').attr('class', 'fas fa-heart').appendTo($footer);
     $('<i>').attr('class', 'fas fa-retweet').appendTo($footer);
     $('<i>').attr('class', 'fas fa-flag').appendTo($footer);
