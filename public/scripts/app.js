@@ -4,30 +4,12 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-// Test / driver code (temporary). Eventually will get this from the server.
-const tweetData = {
-  "user": {
-    "name": "Newton",
-    "avatars": {
-      "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-      "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-      "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-    },
-    "handle": "@SirIsaac"
-  },
-  "content": {
-    "text": "If I have seen further it is by standing on the shoulders of giants"
-  },
-  "created_at": 1461116232227
-}
-
-
 
 $(document).ready(function() {
 
   // Return time since tweet was created as days, hours, minutes, or seconds
   function timeSince(created) {
-    let seconds = Math.floor((Date.now() - created) / 1000);
+    const seconds = Math.floor((Date.now() - created) / 1000);
     let time = Math.floor(seconds / (60 * 60 * 24));
 
     if (time > 1) {
@@ -44,34 +26,80 @@ $(document).ready(function() {
       return time + ' minutes ago';
     }
 
-    return time + 'seconds ago';
+    return Math.floor(time) + ' seconds ago';
   }
 
   // Takes a tweet object and returns a tweet article element containing the
   // tweets entire HTML structure
   function createTweetElement(data) {
-    var $article = $('<article>').addClass('tweet');
-    var $header = $('<header>').appendTo($article);
-    var $content = $('<p>').text(data.content.text).appendTo($article);
-    var $footer = $('<footer>').appendTo($article);
-    var tweetAge = timeSince(data.created_at);
+    const $tweet = $('<article>').addClass('tweet');
+    const $header = $('<header>');
+    const $content = $('<p>');
+    const $footer = $('<footer>');
+    const tweetAge = timeSince(data.created_at);
 
     // Add data into header section of tweet
     $('<img>').attr('src', data.user.avatars.small).appendTo($header);
     $('<h2>').text(data.user.name).appendTo($header);
     $('<p>').text(data.user.handle).appendTo($header);
 
+    // Add tweet text content
+    $content.text(data.content.text);
+
     // Add data into footer section of tweet
     $('<small>').text(tweetAge).appendTo($footer);
-    $('<i>').attr('class', 'fas fa-heart').appendTo($footer);
-    $('<i>').attr('class', 'fas fa-retweet').appendTo($footer);
-    $('<i>').attr('class', 'fas fa-flag').appendTo($footer);
+    $('<i>').addClass('fas fa-heart').appendTo($footer);
+    $('<i>').addClass('fas fa-retweet').appendTo($footer);
+    $('<i>').addClass('fas fa-flag').appendTo($footer);
 
-    return $article;
+    return $tweet.append(
+        $header,
+        $content,
+        $footer
+      );
   }
 
-  var $tweet = createTweetElement(tweetData);
-  console.log($tweet);
-  var $tweetsContainer = $('#tweets-container').append($tweet);
+  // Takes in an array of tweet objects and appends each one to the
+  // tweets-container section
+  function renderTweets(tweets) {
+    const $tweetsContainer = $('#tweets-container');
+
+    tweets.forEach(function(tweet) {
+      const $addTweet = createTweetElement(tweet);
+      $addTweet.appendTo($tweetsContainer);
+    });
+  }
+
+  // Fetches tweets from localhost:8080/tweets
+  function loadTweets() {
+    $.ajax({
+      url: '/tweets',
+      method: 'GET',
+      success: function(tweets) {
+        renderTweets(tweets);
+      }
+    });
+  }
+
+  loadTweets();
+
+  $('.new-tweet form').on('submit', function(event) {
+    event.preventDefault();
+
+    const $this = $(this);
+    const $input = $this.serialize();
+
+    $.ajax({
+      url: '/tweets',
+      method: 'POST',
+      data: $input,
+      success: function(tweets, status) {
+        console.log('saved' + tweets + ', ' + status);
+      }
+    });
+
+
+  });
+
 
 });
