@@ -88,8 +88,15 @@ $(document).ready(function() {
     const $inputValue = $textarea.val();
     const validateInput = validateTweet($inputValue);
 
+    // Hide error message if it is shown, after change its text value
+    $this.children('small').slideUp(function() {
+      $this.children('small').text(validateInput);
+    });
+
+    // Slide error message down if validateInput is not true
     if (validateInput !== true) {
-      return alert(validateInput);
+      $this.children('small').slideDown();
+      return;
     }
 
     const $input = $this.serialize();
@@ -100,9 +107,10 @@ $(document).ready(function() {
       data: $input,
       success: function(tweets, status) {
         loadTweets();
-        $textarea.val('');
+        $textarea.val('').trigger('input');
       }
     });
+
   });
 
   $('.nav-right a').on('click', function(event) {

@@ -16,6 +16,14 @@ section.new-tweet {
   width: 100%;
 }
 
+.new-tweet small {
+  display: block;
+}
+
+.new-tweet input {
+  margin: 5px 0;
+}
+
 .counter {
   float: right;
 }
