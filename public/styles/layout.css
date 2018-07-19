@@ -45,8 +45,7 @@ article.tweet {
 article.tweet header {
   border-radius: 5px 5px 0 0;
   background-color: #eee;
-  color: #5f5f5f;
-  opacity: 0.8;
+  color: rgba(95, 95, 95, 0.8);
 }
 
 article.tweet h2 {
@@ -63,6 +62,7 @@ article.tweet header p {
 
 article.tweet p {
   margin: 1em;
+  word-wrap: break-word;
 }
 
 article.tweet footer {
@@ -88,7 +88,7 @@ article.tweet:hover {
 }
 
 article.tweet:hover header {
-  opacity: 1;
+  color: rgba(95, 95, 95, 1);
 }
 
 article.tweet:hover footer i {
@@ -98,8 +98,3 @@ article.tweet:hover footer i {
   opacity: 0.7;
   margin: 3px;
 }
-
-
-
-
-
