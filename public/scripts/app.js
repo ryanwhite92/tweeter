@@ -84,8 +84,8 @@ $(document).ready(function() {
     event.preventDefault();
 
     const $this = $(this);
-    console.log($this);
-    const $inputValue = $this.children('textarea').val();
+    const $textarea = $this.children('textarea');
+    const $inputValue = $textarea.val();
     const validateInput = validateTweet($inputValue);
 
     if (validateInput !== true) {
@@ -93,7 +93,6 @@ $(document).ready(function() {
     }
 
     const $input = $this.serialize();
-    console.log('$input' + $input)
 
     $.ajax({
       url: '/tweets',
@@ -101,7 +100,18 @@ $(document).ready(function() {
       data: $input,
       success: function(tweets, status) {
         loadTweets();
+        $textarea.val('');
       }
+    });
+  });
+
+  $('.nav-right a').on('click', function(event) {
+    const $newTweet = $('.new-tweet');
+
+    // Callback function focuses on textarea once slideToggle animation
+    // has finished
+    $newTweet.slideToggle(function() {
+      $newTweet.find('textarea').focus();
     });
   });
 
