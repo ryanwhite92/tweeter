@@ -1,0 +1,108 @@
+$horizontal-center: 0 auto;
+$border-stack: 1px solid #d3d3d3;
+$border-hover-stack: 1px solid #244751;
+$font-stack: 'Roboto Condensed', sans-serif;
+$primary-radius: 5px;
+$primary-background-color: #eee;
+$primary-color: #244751;
+$secondary-color: #00a087;
+$primary-spacing: 0.5em;
+
+/*
+ * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ * https://css-tricks.com/international-box-sizing-awareness-day/
+ * Do not modify these two selectors, please
+ */
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/*
+ * Global layout stuff
+ */
+
+body {
+  margin: 0;
+  color: $primary-color;
+  background-color: $primary-background-color;
+  font-family: $font-stack;
+}
+
+/*
+ * Additional CSS can be defined below or in other CSS files, as per instructions
+ */
+
+ main.container {
+  background-color: #fff;
+  margin: 80px auto 0 auto;
+  padding: 60px 2em;
+  width: 450px;
+}
+
+/*
+ * Styles individual Tweets
+ */
+
+article.tweet {
+  border: $border-stack;
+  border-radius: $primary-radius;
+  margin: $primary-spacing 0;
+
+  header {
+    border-radius: $primary-radius $primary-radius 0 0;
+    background-color: $primary-background-color;
+    color: $primary-color;
+    opacity: 0.8;
+
+    img {
+      border-radius: $primary-radius;
+      margin: $primary-spacing;
+    }
+
+    h2 {
+      display: inline-block;
+      margin: $primary-spacing 0;
+      vertical-align: top;
+    }
+
+    p {
+      display: inline-block;
+      margin: $primary-spacing;
+      float: right;
+    }
+  }
+
+  p {
+    margin: 1em;
+    word-wrap: break-word;
+  }
+
+  footer {
+    border-top: $border-stack;
+    padding: $primary-spacing;
+
+    i {
+      display: none;
+    }
+  }
+}
+
+article.tweet:hover {
+  border: $border-hover-stack;
+
+  header {
+    opacity: 0.8;
+  }
+
+  footer i {
+    display: inline;
+    float: right;
+    color: $secondary-color;
+    margin: 3px;
+    opacity: 0.7;
+  }
+}
