@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: $secondary-color;
+  background-color: $nav-color;
   color: #fff;
   padding: 0 2em;
   z-index: 1000;
@@ -31,15 +31,15 @@
   li {
     background-color: #fff;
     opacity: 0.8;
-    color: $secondary-color;
-    border: $border-hover-stack;
-    border-radius: $primary-radius;
-    padding: (2 * $primary-spacing) $primary-spacing;
-  }
+    color: $nav-color;
+    border: $border-hover;
+    border-radius: $border-radius;
+    padding: 1em $narrow-spacing;
 
-  li:hover {
-    opacity: 1;
-    color: $primary-color;
+    &:hover {
+      opacity: 1;
+      color: $font-color;
+    }
   }
 
   a {

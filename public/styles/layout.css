@@ -107,9 +107,6 @@ section.new-tweet .invalid {
   color: red;
 }
 
-/*
- * Styles individual Tweets
- */
 article.tweet {
   border: 1px solid #d3d3d3;
   border-radius: 5px;
@@ -146,7 +143,6 @@ article.tweet footer {
 article.tweet footer i {
   display: none;
 }
-
 article.tweet:hover {
   border: 1px solid #244751;
 }

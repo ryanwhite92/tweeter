@@ -1,17 +1,17 @@
 section.new-tweet {
-  background-color: $primary-background-color;
-  border: $border-stack;
-  border-radius: $primary-radius;
-  padding: $primary-spacing;
+  background-color: $background-gray;
+  border: $border;
+  border-radius: $border-radius;
+  padding: $narrow-spacing;
 
   h2 {
-    border-bottom: $border-hover-stack;
+    border-bottom: $border-hover;
     margin-top: 0;
   }
 
   textarea {
-    margin: $horizontal-center;
-    padding: $primary-spacing;
+    margin: $margin-center;
+    padding: $narrow-spacing;
     width: 100%;
   }
 

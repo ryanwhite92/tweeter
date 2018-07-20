@@ -1,0 +1,59 @@
+article.tweet {
+  border: $border;
+  border-radius: $border-radius;
+  margin: $narrow-spacing 0;
+
+  header {
+    border-radius: $border-radius $border-radius 0 0;
+    background-color: $background-gray;
+    color: $font-color;
+    opacity: 0.8;
+
+    img {
+      border-radius: $border-radius;
+      margin: $narrow-spacing;
+    }
+
+    h2 {
+      display: inline-block;
+      margin: $narrow-spacing 0;
+      vertical-align: top;
+    }
+
+    p {
+      display: inline-block;
+      margin: $narrow-spacing;
+      float: right;
+    }
+  }
+
+  p {
+    margin: 1em;
+    word-wrap: break-word;
+  }
+
+  footer {
+    border-top: $border;
+    padding: $narrow-spacing;
+
+    i {
+      display: none;
+    }
+  }
+
+  &:hover {
+    border: $border-hover;
+
+    header {
+      opacity: 1;
+    }
+
+    footer i {
+      display: inline;
+      float: right;
+      color: $nav-color;
+      margin: 3px;
+      opacity: 0.7;
+    }
+  }
+}

@@ -1,13 +1,4 @@
-$horizontal-center: 0 auto;
-$border-stack: 1px solid #d3d3d3;
-$border-hover-stack: 1px solid #244751;
-$font-stack: 'Roboto Condensed', sans-serif;
-$primary-radius: 5px;
-$primary-background-color: #eee;
-$primary-color: #244751;
-$secondary-color: #00a087;
-$primary-size: 80px;
-$primary-spacing: 0.5em;
+@import 'variables';
 
 /*
  * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
@@ -28,8 +19,8 @@ html {
 
 body {
   margin: 0;
-  color: $primary-color;
-  background-color: $primary-background-color;
+  color: $font-color;
+  background-color: $background-gray;
   font-family: $font-stack;
 }
 
@@ -50,67 +41,4 @@ body {
 
 @import 'nav';
 @import 'new-tweet';
-
-/*
- * Styles individual Tweets
- */
-
-article.tweet {
-  border: $border-stack;
-  border-radius: $primary-radius;
-  margin: $primary-spacing 0;
-
-  header {
-    border-radius: $primary-radius $primary-radius 0 0;
-    background-color: $primary-background-color;
-    color: $primary-color;
-    opacity: 0.8;
-
-    img {
-      border-radius: $primary-radius;
-      margin: $primary-spacing;
-    }
-
-    h2 {
-      display: inline-block;
-      margin: $primary-spacing 0;
-      vertical-align: top;
-    }
-
-    p {
-      display: inline-block;
-      margin: $primary-spacing;
-      float: right;
-    }
-  }
-
-  p {
-    margin: 1em;
-    word-wrap: break-word;
-  }
-
-  footer {
-    border-top: $border-stack;
-    padding: $primary-spacing;
-
-    i {
-      display: none;
-    }
-  }
-}
-
-article.tweet:hover {
-  border: $border-hover-stack;
-
-  header {
-    opacity: 1;
-  }
-
-  footer i {
-    display: inline;
-    float: right;
-    color: $secondary-color;
-    margin: 3px;
-    opacity: 0.7;
-  }
-}
+@import 'article';
