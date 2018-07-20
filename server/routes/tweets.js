@@ -43,7 +43,7 @@ module.exports = function(DataHelpers) {
   });
 
   tweetsRoutes.post("/like", function(req, res) {
-    const time = req.body.created_at;
+    const time = req.body.timestamp;
 
     DataHelpers.changeTweetLikes(time, (err) => {
       if (err) {

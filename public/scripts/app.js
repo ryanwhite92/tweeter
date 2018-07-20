@@ -132,8 +132,16 @@ $(document).ready(function() {
 
     if (event.target.classList[0] === 'like') {
       const $like = $(event.target);
-      const data = $like.attr('data-time');
-      console.log(data);
+      const timestamp = $like.attr('data-time');
+
+      $.ajax({
+        url: '/tweets/like',
+        method: 'POST',
+        data: {timestamp: timestamp},
+        success: function(tweets, status) {
+          console.log('updated likes.');
+        }
+      });
     }
 
   });
