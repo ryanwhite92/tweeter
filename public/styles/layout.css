@@ -156,5 +156,8 @@ article.tweet:hover footer i {
   margin: 3px;
   opacity: 0.7;
 }
+article.tweet:hover .liked {
+  color: red;
+}
 
 /*# sourceMappingURL=layout.css.map */

@@ -131,8 +131,9 @@ $(document).ready(function() {
     event.preventDefault();
 
     if (event.target.classList[0] === 'like') {
-      const $like = $(event.target);
-      const timestamp = $like.attr('data-time');
+      const $target = $(event.target);
+      const timestamp = $target.attr('data-time');
+      $target.addClass('liked');
 
       $.ajax({
         url: '/tweets/like',
