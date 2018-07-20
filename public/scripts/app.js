@@ -11,9 +11,10 @@ $(document).ready(function() {
   // tweets entire HTML structure
   function createTweetElement(data) {
     const $tweet = $('<article>').addClass('tweet');
-    const $header = $('<header>');
+    const $header = $('<header>').addClass('header');
     const $content = $('<p>');
     const $footer = $('<footer>');
+    const $like = $('<a>').attr('href', '#').appendTo($footer);
     const tweetAge = moment(data.created_at).fromNow();
 
     // Add data into header section of tweet
@@ -26,7 +27,10 @@ $(document).ready(function() {
 
     // Add data into footer section of tweet
     $('<small>').text(tweetAge).appendTo($footer);
-    $('<i>').addClass('fas fa-heart').appendTo($footer);
+    $('<i>')
+      .addClass('like fas fa-heart')
+      .attr('data-time', data.created_at)
+      .appendTo($like);
     $('<i>').addClass('fas fa-retweet').appendTo($footer);
     $('<i>').addClass('fas fa-flag').appendTo($footer);
 
@@ -122,6 +126,18 @@ $(document).ready(function() {
       $newTweet.find('textarea').focus();
     });
   });
+
+  $('#tweets-container').on('click', function(event) {
+    event.preventDefault();
+
+    if (event.target.classList[0] === 'like') {
+      const $like = $(event.target);
+      const data = $like.attr('data-time');
+      console.log(data);
+    }
+
+  });
+
 
 
 });
