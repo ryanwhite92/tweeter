@@ -6,6 +6,7 @@ $primary-radius: 5px;
 $primary-background-color: #eee;
 $primary-color: #244751;
 $secondary-color: #00a087;
+$primary-size: 80px;
 $primary-spacing: 0.5em;
 
 /*
@@ -38,10 +39,17 @@ body {
 
  main.container {
   background-color: #fff;
-  margin: 80px auto 0 auto;
+  margin: $primary-size auto 0 auto;
   padding: 60px 2em;
   width: 450px;
 }
+
+/*
+ * Import `navbar` and `new-tweet` styling
+ */
+
+@import 'nav';
+@import 'new-tweet';
 
 /*
  * Styles individual Tweets
@@ -95,7 +103,7 @@ article.tweet:hover {
   border: $border-hover-stack;
 
   header {
-    opacity: 0.8;
+    opacity: 1;
   }
 
   footer i {

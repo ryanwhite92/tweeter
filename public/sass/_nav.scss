@@ -1,0 +1,49 @@
+#nav-bar {
+  position: fixed;
+  height: $primary-size;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $secondary-color;
+  color: #fff;
+  padding: 0 2em;
+  z-index: 1000;
+
+  .logo {
+    width: $primary-size;
+    height: $primary-size;
+    float: left;
+  }
+
+  .header {
+    font-size: 2em;
+    line-height: $primary-size;
+    float: left;
+    margin-left: 10px;
+  }
+}
+
+.nav-right {
+  list-style: none;
+  float: right;
+  margin: 11px 0;
+
+  li {
+    background-color: #fff;
+    opacity: 0.8;
+    color: $secondary-color;
+    border: $border-hover-stack;
+    border-radius: $primary-radius;
+    padding: (2 * $primary-spacing) $primary-spacing;
+  }
+
+  li:hover {
+    opacity: 1;
+    color: $primary-color;
+  }
+
+  a {
+    font-family: $font-stack;
+    text-decoration: none;
+  }
+}

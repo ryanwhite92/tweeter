@@ -1,0 +1,33 @@
+section.new-tweet {
+  background-color: $primary-background-color;
+  border: $border-stack;
+  border-radius: $primary-radius;
+  padding: $primary-spacing;
+
+  h2 {
+    border-bottom: $border-hover-stack;
+    margin-top: 0;
+  }
+
+  textarea {
+    margin: $horizontal-center;
+    padding: $primary-spacing;
+    width: 100%;
+  }
+
+  small {
+    display: block;
+  }
+
+  input {
+    margin: 5px 0;
+  }
+
+  .counter {
+    float: right;
+  }
+
+  .invalid {
+    color: red;
+  }
+}
