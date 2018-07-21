@@ -13,7 +13,24 @@ module.exports = function makeDataHelpers(db) {
         const sortNewestFirst = (a, b) => a.created_at - b.created_at;
         callback(null, tweets.sort(sortNewestFirst));
       });
+    },
+
+    // Find liked tweet based on timestamp and increment/decrement likes counter
+    changeTweetLikes: function(timestamp, adjustment, callback) {
+      db.collection('tweets').find().toArray((err, tweets) => {
+        let likedTweet = tweets.filter((tweet) => {
+          return tweet.created_at == timestamp;
+        })[0];
+
+        if (adjustment > 0) {
+          db.collection('tweets').updateOne(likedTweet, {$inc: {likes: 1}});
+        } else {
+          db.collection('tweets').updateOne(likedTweet, {$inc: {likes: -1}});
+        }
+
+        callback();
+      });
     }
 
-  };
+  }
 }

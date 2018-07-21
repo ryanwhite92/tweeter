@@ -11,9 +11,12 @@ $(document).ready(function() {
   // tweets entire HTML structure
   function createTweetElement(data) {
     const $tweet = $('<article>').addClass('tweet');
-    const $header = $('<header>');
+    const $header = $('<header>').addClass('header');
     const $content = $('<p>');
     const $footer = $('<footer>');
+    const $footerRight = $('<div>').addClass('footer-right');
+    const $likeSpan = $('<span>');
+    const $likeClick = $('<a>').attr('href', '#').appendTo($likeSpan);
     const tweetAge = moment(data.created_at).fromNow();
 
     // Add data into header section of tweet
@@ -26,14 +29,20 @@ $(document).ready(function() {
 
     // Add data into footer section of tweet
     $('<small>').text(tweetAge).appendTo($footer);
-    $('<i>').addClass('fas fa-heart').appendTo($footer);
-    $('<i>').addClass('fas fa-retweet').appendTo($footer);
-    $('<i>').addClass('fas fa-flag').appendTo($footer);
+    $('<i>').addClass('fas fa-flag').appendTo($footerRight);
+    $('<i>').addClass('fas fa-retweet').appendTo($footerRight);
+    $('<i>')
+      .addClass('like fas fa-heart')
+      .attr({'data-time': data.created_at, 'data-likes': data.likes})
+      .appendTo($likeClick);
+      $('<small>').text(data.likes).appendTo($likeSpan);
 
     return $tweet.append(
         $header,
         $content,
-        $footer
+        $footer.append(
+          $footerRight.append($likeSpan)
+          )
       );
   }
 
@@ -122,6 +131,41 @@ $(document).ready(function() {
       $newTweet.find('textarea').focus();
     });
   });
+
+  $('#tweets-container').on('click', function(event) {
+    event.preventDefault();
+
+    if (event.target.classList[0] === 'like') {
+      const $target = $(event.target);
+      const timestamp = $target.attr('data-time');
+      let likes = $target.attr('data-likes');
+      let adjustment;
+
+      if (event.target.classList.contains('liked')) {
+        likes--;
+        $target.removeClass('liked');
+        adjustment = -1;
+      } else {
+        likes++;
+        $target.addClass('liked');
+        adjustment = 1;
+      }
+
+      $target.attr('data-likes', likes);
+      $target.closest('span').find('small').text(likes);
+
+      $.ajax({
+        url: '/tweets/like',
+        method: 'POST',
+        data: {timestamp: timestamp, adjustment: adjustment},
+        success: function(tweets, status) {
+          console.log('updated likes.');
+        }
+      });
+    }
+
+  });
+
 
 
 });
