@@ -33,7 +33,7 @@ $(document).ready(function() {
     $('<i>').addClass('fas fa-retweet').appendTo($footerRight);
     $('<i>')
       .addClass('like fas fa-heart')
-      .attr({'data-time': data.created_at, 'data-likes': data.likes})
+      .attr({'data-id': data._id, 'data-likes': data.likes})
       .appendTo($likeClick);
       $('<small>').text(data.likes).appendTo($likeSpan);
 
@@ -137,7 +137,7 @@ $(document).ready(function() {
 
     if (event.target.classList[0] === 'like') {
       const $target = $(event.target);
-      const timestamp = $target.attr('data-time');
+      const tweetId = $target.attr('data-id');
       let likes = $target.attr('data-likes');
       let adjustment;
 
@@ -157,7 +157,7 @@ $(document).ready(function() {
       $.ajax({
         url: '/tweets/like',
         method: 'POST',
-        data: {timestamp: timestamp, adjustment: adjustment},
+        data: {tweetId: tweetId, adjustment: adjustment},
         success: function(tweets, status) {
           console.log('updated likes.');
         }

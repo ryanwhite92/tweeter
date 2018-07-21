@@ -43,10 +43,10 @@ module.exports = function(DataHelpers) {
   });
 
   tweetsRoutes.post("/like", function(req, res) {
-    const time = req.body.timestamp;
+    const tweetId = req.body.tweetId;
     const adjustment = req.body.adjustment;
 
-    DataHelpers.changeTweetLikes(time, adjustment, (err) => {
+    DataHelpers.changeTweetLikes(tweetId, adjustment, (err) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {

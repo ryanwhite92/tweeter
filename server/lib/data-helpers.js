@@ -16,10 +16,10 @@ module.exports = function makeDataHelpers(db) {
     },
 
     // Find liked tweet based on timestamp and increment/decrement likes counter
-    changeTweetLikes: function(timestamp, adjustment, callback) {
+    changeTweetLikes: function(tweetId, adjustment, callback) {
       db.collection('tweets').find().toArray((err, tweets) => {
         let likedTweet = tweets.filter((tweet) => {
-          return tweet.created_at == timestamp;
+          return tweet._id == tweetId;
         })[0];
 
         if (adjustment > 0) {
