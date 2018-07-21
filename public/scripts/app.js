@@ -139,16 +139,25 @@ $(document).ready(function() {
       const $target = $(event.target);
       const timestamp = $target.attr('data-time');
       let likes = $target.attr('data-likes');
+      let adjustment;
 
-      likes++;
-      $target.addClass('liked');
+      if (event.target.classList.contains('liked')) {
+        likes--;
+        $target.removeClass('liked');
+        adjustment = -1;
+      } else {
+        likes++;
+        $target.addClass('liked');
+        adjustment = 1;
+      }
+
       $target.attr('data-likes', likes);
       $target.closest('span').find('small').text(likes);
 
       $.ajax({
         url: '/tweets/like',
         method: 'POST',
-        data: {timestamp: timestamp},
+        data: {timestamp: timestamp, adjustment: adjustment},
         success: function(tweets, status) {
           console.log('updated likes.');
         }

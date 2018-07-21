@@ -44,8 +44,9 @@ module.exports = function(DataHelpers) {
 
   tweetsRoutes.post("/like", function(req, res) {
     const time = req.body.timestamp;
+    const adjustment = req.body.adjustment;
 
-    DataHelpers.changeTweetLikes(time, (err) => {
+    DataHelpers.changeTweetLikes(time, adjustment, (err) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
