@@ -14,7 +14,9 @@ $(document).ready(function() {
     const $header = $('<header>').addClass('header');
     const $content = $('<p>');
     const $footer = $('<footer>');
-    const $like = $('<a>').attr('href', '#').appendTo($footer);
+    const $footerRight = $('<div>').addClass('footer-right');
+    const $likeSpan = $('<span>');
+    const $likeClick = $('<a>').attr('href', '#').appendTo($likeSpan);
     const tweetAge = moment(data.created_at).fromNow();
 
     // Add data into header section of tweet
@@ -27,17 +29,20 @@ $(document).ready(function() {
 
     // Add data into footer section of tweet
     $('<small>').text(tweetAge).appendTo($footer);
+    $('<i>').addClass('fas fa-flag').appendTo($footerRight);
+    $('<i>').addClass('fas fa-retweet').appendTo($footerRight);
     $('<i>')
       .addClass('like fas fa-heart')
-      .attr('data-time', data.created_at)
-      .appendTo($like);
-    $('<i>').addClass('fas fa-retweet').appendTo($footer);
-    $('<i>').addClass('fas fa-flag').appendTo($footer);
+      .attr({'data-time': data.created_at, 'data-likes': data.likes})
+      .appendTo($likeClick);
+      $('<small>').text(data.likes).appendTo($likeSpan);
 
     return $tweet.append(
         $header,
         $content,
-        $footer
+        $footer.append(
+          $footerRight.append($likeSpan)
+          )
       );
   }
 
@@ -133,7 +138,12 @@ $(document).ready(function() {
     if (event.target.classList[0] === 'like') {
       const $target = $(event.target);
       const timestamp = $target.attr('data-time');
+      let likes = $target.attr('data-likes');
+
+      likes++;
       $target.addClass('liked');
+      $target.attr('data-likes', likes);
+      $target.closest('span').find('small').text(likes);
 
       $.ajax({
         url: '/tweets/like',

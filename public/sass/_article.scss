@@ -36,7 +36,12 @@ article.tweet {
     border-top: $border;
     padding: $narrow-spacing;
 
-    i {
+    .footer-right {
+      display: inline;
+      float: right;
+    }
+
+    .footer-right i, .footer-right small {
       display: none;
     }
   }
@@ -48,7 +53,7 @@ article.tweet {
       opacity: 1;
     }
 
-    footer i {
+    .footer-right i {
       display: inline;
       float: right;
       color: $nav-color;
@@ -56,7 +61,12 @@ article.tweet {
       opacity: 0.7;
     }
 
-    .liked {
+    .footer-right small {
+      display: inline;
+      margin: 3px;
+    }
+
+    .footer-right i.liked {
       color: red;
     }
   }
