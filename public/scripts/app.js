@@ -155,9 +155,9 @@ $(document).ready(function() {
       $target.closest('span').find('small').text(likes);
 
       $.ajax({
-        url: '/tweets/like',
+        url: '/tweets/' + tweetId,
         method: 'POST',
-        data: {tweetId: tweetId, adjustment: adjustment},
+        data: {adjustment: adjustment},
         success: function(tweets, status) {
           console.log('updated likes.');
         }

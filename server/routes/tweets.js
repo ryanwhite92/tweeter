@@ -42,8 +42,8 @@ module.exports = function(DataHelpers) {
     });
   });
 
-  tweetsRoutes.post("/like", function(req, res) {
-    const tweetId = req.body.tweetId;
+  tweetsRoutes.post("/:tweetId", function(req, res) {
+    const tweetId = req.params.tweetId;
     const adjustment = req.body.adjustment;
 
     DataHelpers.changeTweetLikes(tweetId, adjustment, (err) => {
