@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const Chance = require("chance");
+const Chance = require('chance');
 const chance = new Chance();
 
 const md5 = require('md5');
@@ -11,12 +11,12 @@ module.exports = {
     const gender    = chance.gender();
     const firstName = chance.first({gender: gender});
     const lastName  = chance.last();
-    const userName  = firstName + " " + lastName;
+    const userName  = `${firstName} ${lastName}`;
 
-    let userHandle = "@";
+    let userHandle = '@';
     if (Math.random() > 0.5) {
       let prefix    = chance.prefix({gender: gender});
-      prefix = prefix.replace(".", "");
+      prefix = prefix.replace('.', '');
       userHandle += prefix
     }
 

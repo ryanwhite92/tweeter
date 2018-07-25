@@ -40,9 +40,7 @@ $(document).ready(function() {
     return $tweet.append(
         $header,
         $content,
-        $footer.append(
-          $footerRight.append($likeSpan)
-          )
+        $footer.append($footerRight.append($likeSpan))
       );
   }
 
@@ -163,9 +161,6 @@ $(document).ready(function() {
         }
       });
     }
-
   });
-
-
 
 });
